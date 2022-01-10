@@ -1,9 +1,12 @@
 defmodule BasketballWebsite do
   def extract_from_path(data, path) do
-    # Please implement the extract_from_path/2 function
+    Regex.split(~r{\.}, path)
+    |> Enum.reduce(data, fn key, extract ->
+      Access.get(extract, key)
+    end)
   end
 
   def get_in_path(data, path) do
-    # Please implement the get_in_path/2 function
+    Kernel.get_in(data, Regex.split(~r{\.}, path))
   end
 end
